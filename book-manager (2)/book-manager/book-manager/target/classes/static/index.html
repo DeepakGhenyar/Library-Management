@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Manager</title>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: 2rem auto; padding: 0 1rem; }
+        h1 { color: #2c3e50; }
+        .form-group { margin-bottom: 1rem; display: flex; gap: 10px; }
+        input { padding: 8px; flex: 1; border: 1px solid #ccc; border-radius: 4px; }
+        button { padding: 8px 16px; background-color: #3498db; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #2980b9; }
+        ul { list-style: none; padding: 0; }
+        li { background: #f9f9f9; border-bottom: 1px solid #eee; padding: 10px; display: flex; justify-content: space-between; align-items: center; }
+        .delete-btn { background-color: #e74c3c; margin-left: 10px; font-size: 0.8rem; }
+        .delete-btn:hover { background-color: #c0392b; }
+    </style>
+</head>
+<body>
+
+<h1>📚 Library Manager</h1>
+
+<div class="form-group">
+    <input type="text" id="title" placeholder="Book Title" required>
+    <input type="text" id="author" placeholder="Author Name" required>
+    <button onclick="addBook()">Add Book</button>
+</div>
+
+<h3>Current Books:</h3>
+<ul id="bookList"></ul>
+
+<script>
+    const API_URL = '/books';
+
+    // 1. READ (GET) - Fetch all books on load
+    async function fetchBooks() {
+        const response = await fetch(API_URL);
+        const books = await response.json();
+        const list = document.getElementById('bookList');
+        list.innerHTML = ''; // Clear current list
+
+        books.forEach(book => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <span><strong>${book.title}</strong> by ${book.author}</span>
+                <button class="delete-btn" onclick="deleteBook(${book.id})">Delete</button>
+            `;
+            list.appendChild(li);
+        });
+    }
+
+    // 2. CREATE (POST) - Add a new book
+    async function addBook() {
+        const titleInput = document.getElementById('title');
+        const authorInput = document.getElementById('author');
+
+        if (!titleInput.value || !authorInput.value) return alert("Please fill both fields");
+
+        await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                title: titleInput.value,
+                author: authorInput.value
+            })
+        });
+
+        titleInput.value = '';
+        authorInput.value = '';
+        fetchBooks(); // Refresh list
+    }
+
+    // 3. DELETE - Remove a book
+    async function deleteBook(id) {
+        if(confirm('Are you sure?')) {
+            await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+            fetchBooks(); // Refresh list
+        }
+    }
+
+    // Initial fetch
+    fetchBooks();
+</script>
+</body>
+</html>
