@@ -1,45 +1,46 @@
 # 📚 Library Management System
 
-A Library Management System designed to manage books, members, and borrowing activities efficiently.  
-The system allows librarians to maintain records of books, issue/return books, and manage users.
+A web-based Library Management System designed to automate and simplify daily library operations such as managing books, members, and issue/return records.
 
 ---
 
 ## 🚀 Project Overview
 
-This project provides a complete solution for managing a library digitally.  
-It helps in automating traditional library operations like:
+This project provides a digital solution for managing library resources efficiently.  
+It replaces traditional manual record-keeping with a structured system that ensures accurate book tracking and smooth member management.
 
-- Adding and managing books
-- Registering members
-- Issuing and returning books
-- Tracking availability
-- Maintaining transaction records
+The system allows administrators to:
+
+- Manage book inventory
+- Register and manage members
+- Issue and return books
+- Track availability status
+- Maintain proper records
 
 ---
 
-## 🛠️ Features
+## ✨ Features
 
 ✅ Add new books  
 ✅ Update book details  
 ✅ Delete books  
 ✅ View all books  
-✅ Search books by title/author  
+✅ Search books  
 ✅ Register new members  
-✅ Issue books  
+✅ Issue books to members  
 ✅ Return books  
-✅ Track issued books  
-✅ Maintain transaction history  
+✅ Track book availability  
+✅ Maintain transaction records  
 
 ---
 
-## 🧠 Tech Stack
+## 🛠️ Tech Stack
 
-(Modify according to your project)
+(Modify if needed according to your project)
 
-- Frontend: HTML, CSS, JavaScript / React
-- Backend: Node.js / Express / Python (Flask/Django)
-- Database: MongoDB / MySQL / SQLite
+- Frontend: HTML, CSS, JavaScript  
+- Backend: Node.js / Express / Python  
+- Database: MongoDB / MySQL / JSON  
 
 ---
 
